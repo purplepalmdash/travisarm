@@ -13,8 +13,8 @@ script:
   - cd src
   - uname -a
   - cat /proc/cpuinfo
+  - cat /etc/issue
   - free -m
-  - dmesg
   - docker info
   - docker images
   - ip addr
