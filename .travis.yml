@@ -1,0 +1,29 @@
+#addons:
+#  apt:
+#    packages:
+#      - python-pygments
+#
+#install:
+#  - rm -rf public || exit 0
+
+script:
+  - cd src
+  - uname -a
+  - cat /proc/cpuinfo
+  - free -m
+  - dmesg
+  - docker info
+  - docker images
+  - ip addr
+  - ping -c1 www.google.com
+
+#deploy:
+#  provider: pages
+#  skip_cleanup: true
+#  local_dir: src/public
+#  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+#  on:
+#    branch: master
+#  repo: purplepalmdash/purplepalmdash.github.io
+#  target_branch: master
+
