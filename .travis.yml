@@ -19,7 +19,8 @@ script:
   #- docker images
   #- ip addr
   #- ping -c1 www.google.com
-  - sudo add-apt-repository ppa:ansible/ansible -y && sudo apt-get update -y && sudo apt-get install -y ansible git python-pip && ansible --version
+  #- sudo add-apt-repository ppa:ansible/ansible -y && sudo apt-get update -y && sudo apt-get install -y ansible git python-pip && ansible --version
+  - sudo apt-get install -y ansible git python-pip && ansible --version
   - pwd
   - git clone https://github.com/kubernetes-sigs/kubespray.git
   - cd kubespray && git checkout tags/v2.13.1 -b kubespray2131 && sudo pip install -r requirements.txt &&  pip install -r requirements.txt
