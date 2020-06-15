@@ -26,6 +26,7 @@ script:
   - wget https://gist.githubusercontent.com/purplepalmdash/5903832d353efd67d4a13ed01f878988/raw/cf02202d2e3079e11873f1926ea83238e72159ec/dinddiffs.diff
   - cat dinddiffs.diff | patch -p1
   - cd contrib/dind && sudo pip install -r requirements.txt &&  pip install -r requirements.txt
+  - sudo pip install docker; sudo pip install docker-py; pip install docker; pip install docker-py
   - sudo ansible-playbook -i hosts dind-cluster.yaml
   - sudo docker ps
 
