@@ -29,6 +29,7 @@ script:
   - sudo pip install docker; sudo pip install docker-py; pip install docker; pip install docker-py
   - sudo pip uninstall -y docker docker-py requests; sudo pip install docker; sudo pip install docker-py; sudo pip install requests>=2.20.1
   - pip uninstall -y docker docker-py requests;  pip install docker;  pip install docker-py;  pip install requests>=2.20.1
+  - pip install --upgrade pip; sudo pip install --upgrade pip
   - sudo pip install -U requests; pip install -U requests
   - sudo ansible-playbook -i hosts dind-cluster.yaml
   - sudo docker ps
