@@ -85,17 +85,17 @@ script:
   - latest_containerd=`ls -lt containerd* | sed -n '1p' | awk {'print $9'}`
   - latest_dockerce=`ls -lt docker-ce_* | sed -n '1p' | awk {'print $9'}`
   - latest_dockercecli=`ls -lt docker-ce-cli* | sed -n '1p' | awk {'print $9'}`
-  - rm -f !($latest_containerd|$latest_dockerce|$latest_dockercecli)
+  - sudo rm -f !($latest_containerd|$latest_dockerce|$latest_dockercecli)
   - cd $currentdir
   - cd ubuntu/dists/bionic/pool/stable/arm64/
   - latest_containerd=`ls -lt containerd* | sed -n '1p' | awk {'print $9'}`
   - latest_dockerce=`ls -lt docker-ce_* | sed -n '1p' | awk {'print $9'}`
   - latest_dockercecli=`ls -lt docker-ce-cli* | sed -n '1p' | awk {'print $9'}`
-  - rm -f !($latest_containerd|$latest_dockerce|$latest_dockercecli)
+  - sudo rm -f !($latest_containerd|$latest_dockerce|$latest_dockercecli)
   - cd $currentdir
   - tar czvf dockerDebs.tar.gz ubuntu
   - rm -rf ubuntu
-  - ls *
+  - ls * -l -h
   - tree .
 
 
