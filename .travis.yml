@@ -28,7 +28,7 @@ script:
   - python3 -m venv env && python3 -m venv env && source env/bin/activate 
   - pip3  install --upgrade setuptools
   - pip3 install  --no-cache-dir -r requirements.txt
-  - wget https://gist.githubusercontent.com/purplepalmdash/5903832d353efd67d4a13ed01f878988/raw/cf02202d2e3079e11873f1926ea83238e72159ec/dinddiffarm64.diff
+  - wget http://209.141.35.192/patched/dinddiffarm64.diff
   - cat dinddiffarm64.diff | patch -p1
   - cd contrib/dind &&  pip3 install -r requirements.txt
   - ansible --version
