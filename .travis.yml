@@ -34,7 +34,7 @@ script:
   - pip3 install --upgrade pip3; sudo pip3 install --upgrade pip3
   - sudo pip3 install docker; sudo pip3 install docker-py; pip3 install docker; pip3 install docker-py
   - sudo pip3 uninstall -y docker docker-py requests; sudo pip3 install docker; sudo pip3 install docker-py
-  - sudo ansible-playbook -i hosts dind-cluster.yaml
+  - ansible-playbook -i hosts dind-cluster.yaml
   - sudo docker ps
 
 
