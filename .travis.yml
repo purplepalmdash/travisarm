@@ -10,48 +10,34 @@ arch:
   - arm64
 
 script:
-  #- cd src
-  #- ps -ef | grep sshd
-  #- sudo apt-get install -y git python-pip python3-virtualenv python3-pip python3-venv python-docker python3-docker openssh-server
-  #- mkdir -p /var/run/sshd && /usr/sbin/sshd -D & 
-  #- mkdir -p /home/travis/build/purplepalmdash/travisarm/src/cached2
-  #- python3 -m pip install --user --upgrade pip && python3 -m pip install --user virtualenv
-  #- git clone https://github.com/kubernetes-sigs/kubespray.git
-  #- sudo mkdir -p /etc/kubernetes && sudo chmod 777 -R /etc/kubernetes
-  #- cd kubespray && git checkout tags/v2.13.1 -b kubespray2131 
-  #- sed -i '14,21 s/^/#/' ./roles/download/tasks/download_file.yml
-  #- sed -i '93,99 s/^/#/' ./roles/download/tasks/download_file.yml
-  #- wget http://209.141.35.192/patched/dinddiffarm64.diff
-  #- wget http://209.141.35.192/patched/cluster1.yml
-  #- wget http://209.141.35.192/patched/rong-vars.yml
-  #- wget http://209.141.35.192/patched/hosts.ini
-  #- cp hosts.ini inventory/sample/hosts.ini
-  #- ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa 2>/dev/null <<< y >/dev/null
-  #- cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
-  #- cat dinddiffarm64.diff | patch -p1
-  #- python3 -m venv env && python3 -m venv env && source env/bin/activate 
-  #- pip3  install --upgrade setuptools
-  #- pip3 install  --no-cache-dir -r requirements.txt
-  #- cd contrib/dind &&  pip3 install -r requirements.txt
-  #- ansible --version
-  #- pip3 install --upgrade pip3
-  #- pip3 install docker; pip3 install docker-py
-  #- pip install docker; pip install docker-py
-  #- ansible-playbook --version
-  #- cd ../../
-  #- pwd && ls
-  #- ansible-playbook -i inventory/sample/hosts.ini cluster1.yml --extra-vars @rong-vars.yml
-  #- ls /home/travis/build/purplepalmdash/travisarm/src/cached/*
-  #- ls /home/travis/build/purplepalmdash/travisarm/src/cached1/*
-  #- ls /home/travis/build/purplepalmdash/travisarm/src/cached2/*
+  - cd src
+  - ps -ef | grep sshd
+  - sudo apt-get install -y git python-pip python3-virtualenv python3-pip python3-venv python-docker python3-docker openssh-server
+  - mkdir -p /var/run/sshd && /usr/sbin/sshd -D & 
+  - mkdir -p /home/travis/build/purplepalmdash/travisarm/src/cached2
+  - python3 -m pip install --user --upgrade pip && python3 -m pip install --user virtualenv
+  - git clone https://github.com/kubernetes-sigs/kubespray.git
+  - sudo mkdir -p /etc/kubernetes && sudo chmod 777 -R /etc/kubernetes
+  - cd kubespray && git checkout tags/v2.13.1 -b kubespray2131 
+  - sed -i '14,21 s/^/#/' ./roles/download/tasks/download_file.yml
+  - sed -i '93,99 s/^/#/' ./roles/download/tasks/download_file.yml
+  - wget http://209.141.35.192/patched/dinddiffarm64.diff
+  - wget http://209.141.35.192/patched/cluster1.yml
+  - wget http://209.141.35.192/patched/rong-vars.yml
+  - wget http://209.141.35.192/patched/hosts.ini
+  - cp hosts.ini inventory/sample/hosts.ini
+  - ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa 2>/dev/null <<< y >/dev/null
+  - cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
+  - cat dinddiffarm64.diff | patch -p1
+  - python3 -m venv env && python3 -m venv env && source env/bin/activate 
+  - pip3  install --upgrade setuptools
+  - pip3 install  --no-cache-dir -r requirements.txt
+  - ansible-playbook -i inventory/sample/hosts.ini cluster1.yml --extra-vars @rong-vars.yml
+  - ls /home/travis/build/purplepalmdash/travisarm/src/cached/*
+  - ls /home/travis/build/purplepalmdash/travisarm/src/cached1/*
+  - ls /home/travis/build/purplepalmdash/travisarm/src/cached2/*
   - sudo apt-get install -y sshpass
-  #- sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r cached1 root@209.141.35.192:/root/static
-  - sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r src root@209.141.35.192:/root/static
-  #- sudo mkdir -p /home/vsts/docker && sudo chmod 777 -R /home/vsts/docker
-  #- sudo mkdir -p /home/vsts/releases && sudo chmod 777 -R /home/vsts/releases
-  #- ansible-playbook -i hosts dind-cluster.yaml
-  #- whoami && pwd  && pip list | egrep 'docker|docker-py|requests'
-  #- sudo docker ps
+  - sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r cached1 root@209.141.35.192:/root/static
 
 
 #deploy:
