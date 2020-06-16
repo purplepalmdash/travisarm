@@ -31,11 +31,9 @@ script:
   - cat dinddiffs.diff | patch -p1
   - cd contrib/dind && sudo pip3 install -r requirements.txt &&  pip3 install -r requirements.txt
   - ansible --version
-  - sudo pip3 install docker; sudo pip3 install docker-py; pip3 install docker; pip3 install docker-py
-  - sudo pip3 uninstall -y docker docker-py requests; sudo pip3 install docker; sudo pip3 install docker-py; sudo pip3 install requests>=2.20.1
-  - pip3 uninstall -y docker docker-py requests;  pip3 install docker;  pip3 install docker-py;  pip3 install requests>=2.20.1
   - pip3 install --upgrade pip3; sudo pip3 install --upgrade pip3
-  - sudo pip3 install -U requests; pip3 install -U requests
+  - sudo pip3 install docker; sudo pip3 install docker-py; pip3 install docker; pip3 install docker-py
+  - sudo pip3 uninstall -y docker docker-py requests; sudo pip3 install docker; sudo pip3 install docker-py
   - sudo ansible-playbook -i hosts dind-cluster.yaml
   - sudo docker ps
 
