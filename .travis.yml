@@ -20,7 +20,9 @@ script:
   #- ip addr
   #- ping -c1 www.google.com
   #- sudo add-apt-repository ppa:ansible/ansible -y && sudo apt-get update -y && sudo apt-get install -y ansible git python-pip && ansible --version
-  - sudo apt-get install -y git python-pip python3-virtualenv python3-pip python3-venv python-docker python3-docker
+  - sudo apt-get install -y git python-pip python3-virtualenv python3-pip python3-venv python-docker python3-docker openssh-server
+  - mkdir -p /var/run/sshd && /usr/sbin/sshd -D & 
+  - ps -ef | grep sshd
   - whoami && pwd 
   - python3 -m pip install --user --upgrade pip && python3 -m pip install --user virtualenv
   - git clone https://github.com/kubernetes-sigs/kubespray.git
@@ -32,6 +34,8 @@ script:
   - cp hosts.ini inventory/sample/hosts.ini
   - ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa 2>/dev/null <<< y >/dev/null
   - cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
+  - ssh 127.0.0.1
+  - exit
   - cat dinddiffarm64.diff | patch -p1
   - python3 -m venv env && python3 -m venv env && source env/bin/activate 
   - pip3  install --upgrade setuptools
