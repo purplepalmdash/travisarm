@@ -30,7 +30,7 @@ script:
   - whoami && pwd 
   - python3 -m pip install --user --upgrade pip && python3 -m pip install --user virtualenv
   - git clone https://github.com/kubernetes-sigs/kubespray.git
-  - sudo mkdir -p /etc/kubernetes
+  - sudo mkdir -p /etc/kubernetes && sudo chmod 777 -R /etc/kubernetes
   - cd kubespray && git checkout tags/v2.13.1 -b kubespray2131 
   - sed -i '14,21 s/^/#/' ./roles/download/tasks/download_file.yml
   - sed -i '93,99 s/^/#/' ./roles/download/tasks/download_file.yml
