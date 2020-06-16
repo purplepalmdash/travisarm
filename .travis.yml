@@ -94,9 +94,8 @@ script:
   - sudo rm -f !($latest_containerd|$latest_dockerce|$latest_dockercecli)
   - cd $currentdir
   - tar czvf dockerDebs.tar.gz ubuntu
-  - rm -rf ubuntu
+  - sudo rm -rf ubuntu
   - ls * -l -h
-  - tree .
 
 
   ### Following is for kubespray docker images
