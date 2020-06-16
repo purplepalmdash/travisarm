@@ -18,52 +18,52 @@ script:
   - printf '#!/bin/sh\npython /usr/local/ansible-playbook $@'>offline/rong_static/for_master0/ansible-playbook_exe
   - chmod 777 offline/rong_static/for_master0/ansible*
   - cd offline/rong_static/for_master0
-  # 2. caddy v2.1.0-beta.1 binary file(https://github.com/caddyserver/caddy/releases)
-  - mkdir -p tmp
-  - wget --quiet https://github.com/caddyserver/caddy/releases/download/v2.1.0-beta.1/caddy_2.1.0-beta.1_linux_arm64.tar.gz
-  - tar xzf caddy_2.1.0-beta.1_linux_arm64.tar.gz -C tmp
-  - rm -f  caddy_2.1.0-beta.1_linux_arm64.tar.gz 
-  - mv tmp/caddy .
-  - rm -rf tmp/
-  # 3. caddy8333.service.template
-  - wget --quiet https://gist.githubusercontent.com/purplepalmdash/e56575c6858e2f1ea63eb41c04733c40/raw/103cb7f05e13b2c3d935bcb3d01e770cca7bbeb7/caddy8333.service.template
-  # 4. coredns v1.6.9 binary file(https://github.com/coredns/coredns/releases)
-  - wget --quiet https://github.com/coredns/coredns/releases/download/v1.6.9/coredns_1.6.9_linux_arm64.tgz
-  - tar xzf coredns_1.6.9_linux_arm64.tgz
-  - rm -f coredns_1.6.9_linux_arm64.tgz
-  # 5. docker-compose v1.26.0 (https://github.com/docker/compose/releases)
-  - wget --quiet https://github.com/ubiquiti/docker-compose-aarch64/releases/download/1.22.0/docker-compose-Linux-aarch64
-  - mv docker-compose-Linux-aarch64 docker-compose && chmod 777 docker-compose
-  # 6. podman-compose beta(https://github.com/containers/podman-compose)
-  - wget --quiet -O podman-compose https://raw.githubusercontent.com/containers/podman-compose/devel/podman_compose.py && chmod 777 podman-compose
-  # 7. portable-ansible(https://github.com/purplepalmdash/portable-ansible/releases/tag/v0.4.2)
-  - wget --quiet https://github.com/purplepalmdash/portable-ansible/releases/download/v0.4.2/portable-ansible-v0.4.2-py2.tar.bz2
-  - wget --quiet https://github.com/purplepalmdash/portable-ansible/releases/download/v0.4.2/portable-ansible-v0.4.2-py3.tar.bz2
-  # 8. registry(https://github.com/docker/distribution-library-image/blob/master/amd64/registry)
-  - wget --quiet https://github.com/docker/distribution-library-image/raw/master/arm64/registry && chmod 777 registry
-  # 9. 1804debs.tar.xz & 2004debs.tar.xz
-  # 20.04
-  - docker run  -v `pwd`:/mnt -d --name deb2004 ubuntu:20.04 sleep 3600
-  #docker exec deb2004 wget -O /etc/apt/sources.list https://gist.githubusercontent.com/purplepalmdash/13b61f10baca2dc8816ea68e0c6d06c7/raw/c0c1fffc3f343612d6f34bbbbdcd4c941cb70479/sources.list
-  - docker exec deb2004 rm -f /etc/apt/apt.conf.d/docker-clean
-  - docker exec deb2004 apt-get update -qq 
-  - docker exec deb2004 apt-get install -qq -y ipset ipvsadm iotop net-tools sshpass iputils-ping nethogs python-netaddr build-essential nfs-common nfs-kernel-server tcpdump unzip wget apt-transport-https socat rpcbind arping fping python-apt pigz
-  #- docker exec deb2004  wget -O /tmp/Release.key https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04/Release.key
-  #- docker exec deb2004 apt-key add /tmp/Release.key
-  #- docker exec deb2004 /bin/sh -c "echo 'deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04/ /'>/etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
-  #- docker exec deb2004 apt-get -qq -y update
-  #- docker exec deb2004 apt-get -qq -y install podman
-  - docker exec deb2004 mkdir -p /mnt/Rong
-  - docker exec deb2004 /bin/sh -c "find /var/cache | grep deb$ | xargs -I % cp % /mnt/Rong/"
-  - docker exec deb2004 /bin/sh -c "cd /mnt/Rong && dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz"
-  - docker stop deb2004
-  - docker rm deb2004
-  - tar cf 2004debs.tar Rong
-  - xz -T4 2004debs.tar
-  - sudo rm -rf Rong
-  - sudo apt-get update -y && sudo apt-get install -y tree
-  - ls *
-  - tree .
+  #*# 2. caddy v2.1.0-beta.1 binary file(https://github.com/caddyserver/caddy/releases)
+  #*- mkdir -p tmp
+  #*- wget --quiet https://github.com/caddyserver/caddy/releases/download/v2.1.0-beta.1/caddy_2.1.0-beta.1_linux_arm64.tar.gz
+  #*- tar xzf caddy_2.1.0-beta.1_linux_arm64.tar.gz -C tmp
+  #*- rm -f  caddy_2.1.0-beta.1_linux_arm64.tar.gz 
+  #*- mv tmp/caddy .
+  #*- rm -rf tmp/
+  #*# 3. caddy8333.service.template
+  #*- wget --quiet https://gist.githubusercontent.com/purplepalmdash/e56575c6858e2f1ea63eb41c04733c40/raw/103cb7f05e13b2c3d935bcb3d01e770cca7bbeb7/caddy8333.service.template
+  #*# 4. coredns v1.6.9 binary file(https://github.com/coredns/coredns/releases)
+  #*- wget --quiet https://github.com/coredns/coredns/releases/download/v1.6.9/coredns_1.6.9_linux_arm64.tgz
+  #*- tar xzf coredns_1.6.9_linux_arm64.tgz
+  #*- rm -f coredns_1.6.9_linux_arm64.tgz
+  #*# 5. docker-compose v1.26.0 (https://github.com/docker/compose/releases)
+  #*- wget --quiet https://github.com/ubiquiti/docker-compose-aarch64/releases/download/1.22.0/docker-compose-Linux-aarch64
+  #*- mv docker-compose-Linux-aarch64 docker-compose && chmod 777 docker-compose
+  #*# 6. podman-compose beta(https://github.com/containers/podman-compose)
+  #*- wget --quiet -O podman-compose https://raw.githubusercontent.com/containers/podman-compose/devel/podman_compose.py && chmod 777 podman-compose
+  #*# 7. portable-ansible(https://github.com/purplepalmdash/portable-ansible/releases/tag/v0.4.2)
+  #*- wget --quiet https://github.com/purplepalmdash/portable-ansible/releases/download/v0.4.2/portable-ansible-v0.4.2-py2.tar.bz2
+  #*- wget --quiet https://github.com/purplepalmdash/portable-ansible/releases/download/v0.4.2/portable-ansible-v0.4.2-py3.tar.bz2
+  #*# 8. registry(https://github.com/docker/distribution-library-image/blob/master/amd64/registry)
+  #*- wget --quiet https://github.com/docker/distribution-library-image/raw/master/arm64/registry && chmod 777 registry
+  #*# 9. 1804debs.tar.xz & 2004debs.tar.xz
+  #*# 20.04
+  #*- docker run  -v `pwd`:/mnt -d --name deb2004 ubuntu:20.04 sleep 3600
+  #*#docker exec deb2004 wget -O /etc/apt/sources.list https://gist.githubusercontent.com/purplepalmdash/13b61f10baca2dc8816ea68e0c6d06c7/raw/c0c1fffc3f343612d6f34bbbbdcd4c941cb70479/sources.list
+  #*- docker exec deb2004 rm -f /etc/apt/apt.conf.d/docker-clean
+  #*- docker exec deb2004 apt-get update -qq 
+  #*- docker exec deb2004 apt-get install -qq -y ipset ipvsadm iotop net-tools sshpass iputils-ping nethogs python-netaddr build-essential nfs-common nfs-kernel-server tcpdump unzip wget apt-transport-https socat rpcbind arping fping python-apt pigz
+  #*#- docker exec deb2004  wget -O /tmp/Release.key https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04/Release.key
+  #*#- docker exec deb2004 apt-key add /tmp/Release.key
+  #*#- docker exec deb2004 /bin/sh -c "echo 'deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04/ /'>/etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
+  #*#- docker exec deb2004 apt-get -qq -y update
+  #*#- docker exec deb2004 apt-get -qq -y install podman
+  #*- docker exec deb2004 mkdir -p /mnt/Rong
+  #*- docker exec deb2004 /bin/sh -c "find /var/cache | grep deb$ | xargs -I % cp % /mnt/Rong/"
+  #*- docker exec deb2004 /bin/sh -c "cd /mnt/Rong && dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz"
+  #*- docker stop deb2004
+  #*- docker rm deb2004
+  #*- tar cf 2004debs.tar Rong
+  #*- xz -T4 2004debs.tar
+  #*- sudo rm -rf Rong
+  #*- sudo apt-get update -y && sudo apt-get install -y tree
+  #*- ls *
+  #*- tree .
   # 10. dockerDebs.tar.gz
   # fetch back the debs
   - docker run  -v `pwd`:/mnt -d --name debdocker ubuntu:20.04 sleep 3600
@@ -78,7 +78,7 @@ script:
   - docker stop debdocker
   - docker rm debdocker
   # Shrink the repository
-  - mv tmpdocker/mirror/download.docker.com/linux/ubuntu/ .
+  - sudo mv tmpdocker/mirror/download.docker.com/linux/ubuntu/ .
   - sudo rm -rf tmpdocker
   - currentdir=`pwd`
   - cd ubuntu/dists/focal/pool/stable/arm64/
