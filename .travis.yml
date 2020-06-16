@@ -26,6 +26,7 @@ script:
   - git clone https://github.com/kubernetes-sigs/kubespray.git
   - cd kubespray && git checkout tags/v2.13.1 -b kubespray2131 
   - python3 -m venv env && python3 -m venv env && source env/bin/activate 
+  - pip3  install --upgrade setuptools
   - pip3 install  --no-cache-dir -r requirements.txt
   - wget https://gist.githubusercontent.com/purplepalmdash/5903832d353efd67d4a13ed01f878988/raw/cf02202d2e3079e11873f1926ea83238e72159ec/dinddiffs.diff
   #- cat dinddiffs.diff | patch -p1
