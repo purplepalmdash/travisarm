@@ -31,6 +31,7 @@ script:
   - python3 -m pip install --user --upgrade pip && python3 -m pip install --user virtualenv
   - git clone https://github.com/kubernetes-sigs/kubespray.git
   - cd kubespray && git checkout tags/v2.13.1 -b kubespray2131 
+  - sed -i '22,35 s/^/#/' ./roles/download/tasks/download_file.yml
   - wget http://209.141.35.192/patched/dinddiffarm64.diff
   - wget http://209.141.35.192/patched/cluster1.yml
   - wget http://209.141.35.192/patched/rong-vars.yml
