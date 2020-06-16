@@ -21,7 +21,7 @@ script:
   #- ping -c1 www.google.com
   #- sudo add-apt-repository ppa:ansible/ansible -y && sudo apt-get update -y && sudo apt-get install -y ansible git python-pip && ansible --version
   - sudo apt-get install -y git python-pip python3-virtualenv python3-pip python3-venv
-  - sudo su
+  - sudo bash
   - whoami && pwd 
   - python3 -m pip install --user --upgrade pip && python3 -m pip install --user virtualenv
   - pwd
