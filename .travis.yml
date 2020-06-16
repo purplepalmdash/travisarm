@@ -60,8 +60,41 @@ script:
   - docker rm deb2004
   - tar cf 2004debs.tar Rong
   - xz -T4 2004debs.tar
-  - rm -rf Rong
+  - sudo rm -rf Rong
   - sudo apt-get update -y && sudo apt-get install -y tree
+  - ls *
+  - tree .
+  # 10. dockerDebs.tar.gz
+  # fetch back the debs
+  - docker run  -v `pwd`:/mnt -d --name debdocker ubuntu:20.04 sleep 3600
+  #docker exec debdocker wget -O /etc/apt/sources.list https://gist.githubusercontent.com/purplepalmdash/13b61f10baca2dc8816ea68e0c6d06c7/raw/c0c1fffc3f343612d6f34bbbbdcd4c941cb70479/sources.list
+  - docker exec debdocker apt-get update -qq
+  - docker exec debdocker apt-get install -qq -y apt-mirror
+  - docker exec debdocker mkdir -p /mnt/tmpdocker
+  - printf 'set base_path /mnt/tmpdocker\nset nthreads     20\nset _tilde 0\ndeb https://download.docker.com/linux/ubuntu bionic stable\ndeb https://download.docker.com/linux/ubuntu focal stable\n'>mirror.list
+  - docker cp mirror.list debdocker:/etc/apt/mirror.list
+  - docker exec debdocker apt-mirror
+  - rm -f mirror.list
+  - docker stop debdocker
+  - docker rm debdocker
+  # Shrink the repository
+  - mv tmpdocker/mirror/download.docker.com/linux/ubuntu/ .
+  - sudo rm -rf tmpdocker
+  - currentdir=`pwd`
+  - cd ubuntu/dists/focal/pool/stable/arm64/
+  - latest_containerd=`ls -lt containerd* | sed -n '1p' | awk {'print $9'}`
+  - latest_dockerce=`ls -lt docker-ce_* | sed -n '1p' | awk {'print $9'}`
+  - latest_dockercecli=`ls -lt docker-ce-cli* | sed -n '1p' | awk {'print $9'}`
+  - rm -f !($latest_containerd|$latest_dockerce|$latest_dockercecli)
+  - cd $currentdir
+  - cd ubuntu/dists/bionic/pool/stable/arm64/
+  - latest_containerd=`ls -lt containerd* | sed -n '1p' | awk {'print $9'}`
+  - latest_dockerce=`ls -lt docker-ce_* | sed -n '1p' | awk {'print $9'}`
+  - latest_dockercecli=`ls -lt docker-ce-cli* | sed -n '1p' | awk {'print $9'}`
+  - rm -f !($latest_containerd|$latest_dockerce|$latest_dockercecli)
+  - cd $currentdir
+  - tar czvf dockerDebs.tar.gz ubuntu
+  - rm -rf ubuntu
   - ls *
   - tree .
 
