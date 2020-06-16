@@ -38,7 +38,7 @@ script:
   - ansible-playbook --version
   - sudo mkdir -p /home/vsts/docker && sudo chmod 777 -R /home/vsts/docker
   - sudo mkdir -p /home/vsts/releases && sudo chmod 777 -R /home/vsts/releases
-  - sudo ansible-playbook -i hosts dind-cluster.yaml
+  - ansible-playbook -i hosts dind-cluster.yaml
   - whoami && pwd  && pip list | egrep 'docker|docker-py|requests'
   - sudo docker ps
 
