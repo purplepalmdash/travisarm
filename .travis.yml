@@ -27,7 +27,6 @@ script:
   #- mkdir cached && chmod 777 -R cached
   #- mkdir cached1 && chmod 777 -R cached1
   - ps -ef | grep sshd
-  - whoami && pwd 
   - python3 -m pip install --user --upgrade pip && python3 -m pip install --user virtualenv
   - git clone https://github.com/kubernetes-sigs/kubespray.git
   - sudo mkdir -p /etc/kubernetes && sudo chmod 777 -R /etc/kubernetes
