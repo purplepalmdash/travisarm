@@ -23,6 +23,7 @@ script:
   - ps -ef | grep sshd
   - sudo apt-get install -y git python-pip python3-virtualenv python3-pip python3-venv python-docker python3-docker openssh-server
   - mkdir -p /var/run/sshd && /usr/sbin/sshd -D & 
+  - mkdir -p /home/travis/build/purplepalmdash/travisarm/src/cached2
   #- sudo mkdir -p /tmp/releases && sudo chmod 777 -R /tmp/releases && sudo chown -R travis /tmp/releases
   #- mkdir cached && chmod 777 -R cached
   #- mkdir cached1 && chmod 777 -R cached1
