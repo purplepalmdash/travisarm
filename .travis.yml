@@ -53,6 +53,14 @@ script:
   - cd ../../
   - pwd && ls
   - ansible-playbook -i inventory/sample/hosts.ini cluster1.yml --extra-vars @rong-vars.yml
+  - apt-get install -y tree
+  - ls /home/travis/build/purplepalmdash/travisarm/src/cached/*
+  - ls /home/travis/build/purplepalmdash/travisarm/src/cached1/*
+  - ls /home/travis/build/purplepalmdash/travisarm/src/cached2/*
+  - tree /home/travis/build/purplepalmdash/travisarm/src/cached/
+  - tree /home/travis/build/purplepalmdash/travisarm/src/cached1/
+  - tree /home/travis/build/purplepalmdash/travisarm/src/cached2/
+  
   #- sudo mkdir -p /home/vsts/docker && sudo chmod 777 -R /home/vsts/docker
   #- sudo mkdir -p /home/vsts/releases && sudo chmod 777 -R /home/vsts/releases
   #- ansible-playbook -i hosts dind-cluster.yaml
