@@ -115,6 +115,7 @@ script:
   - sudo rm -rf /home/travis/build/purplepalmdash/travisarm/src/cached/*
   - ls /home/travis/build/purplepalmdash/travisarm/src/cached1/*
   - sudo rm -rf /home/travis/build/purplepalmdash/travisarm/src/cached2/*
+  - cd .. && sudo rm -rf kubespray
   # docker load all of the images and push them to the local registry server
   - mkdir -p registry
   - docker run -v `pwd`/registry:/var/lib/registry -d -p 5000:5000 --restart=always --name registry registry:2
