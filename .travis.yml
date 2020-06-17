@@ -3,7 +3,8 @@ arch:
 
 script:
   - cd src
-  - bash <(curl -Ss https://my-netdata.io/kickstart.sh)
+  - wget https://my-netdata.io/kickstart.sh && sudo chmod 777 kickstart.sh
+  - sudo ./kickstart.sh
   #- mkdir -p offline/rong_static/for_addons 
   #- mkdir -p offline/rong_static/for_cluster
   #- mkdir -p offline/rong_static/for_master0
