@@ -54,12 +54,24 @@ script:
   - tar cf 2004debs.tar Rong
   - xz -T4 2004debs.tar
   - sudo rm -rf Rong
+  # 18.04
+  - docker run  -v `pwd`:/mnt -d --name deb1804 ubuntu:18.04 sleep 3600
+  - docker exec deb1804 rm -f /etc/apt/apt.conf.d/docker-clean
+  - docker exec deb1804 apt-get update -qq 
+  - docker exec deb1804 apt-get install -qq -y ipset ipvsadm iotop net-tools sshpass iputils-ping nethogs python-netaddr build-essential nfs-common nfs-kernel-server tcpdump unzip wget apt-transport-https socat rpcbind arping fping python-apt pigz
+  - docker exec deb1804 mkdir -p /mnt/Rong
+  - docker exec deb1804 /bin/sh -c "find /var/cache | grep deb$ | xargs -I % cp % /mnt/Rong/"
+  - docker exec deb1804 /bin/sh -c "cd /mnt/Rong && dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz"
+  - docker stop deb1804
+  - docker rm deb1804
+  - tar cf 1804debs.tar Rong
+  - xz -T4 1804debs.tar
+  - sudo rm -rf Rong
   - sudo apt-get update -y && sudo apt-get install -y tree
   - ls *
   # 10. dockerDebs.tar.gz
   # fetch back the debs
   - docker run  -v `pwd`:/mnt -d --name debdocker ubuntu:20.04 sleep 3600
-  #docker exec debdocker wget -O /etc/apt/sources.list https://gist.githubusercontent.com/purplepalmdash/13b61f10baca2dc8816ea68e0c6d06c7/raw/c0c1fffc3f343612d6f34bbbbdcd4c941cb70479/sources.list
   - docker exec debdocker apt-get update -qq
   - docker exec debdocker apt-get install -qq -y apt-mirror
   - docker exec debdocker mkdir -p /mnt/tmpdocker
@@ -90,7 +102,6 @@ script:
   - ls * -l -h
   - cd ..
   ### Following is for kubespray docker images
-  #- ps -ef | grep sshd
   - sudo apt-get install -y git python-pip python3-virtualenv python3-pip python3-venv python-docker python3-docker openssh-server
   - mkdir -p /var/run/sshd && /usr/sbin/sshd -D & 
   - mkdir -p /home/travis/build/purplepalmdash/travisarm/src/cached2
@@ -134,7 +145,9 @@ script:
   - docker push 127.0.0.1:5000/feipyang/install-socat
   - docker stop registry
   - cd registry && sudo tar czf docker.tar.gz docker && sudo mv docker.tar.gz ../ && cd ..
-  - sudo rm -rf registry
+  - sudo rm -rf registry && sudo mv docker.tar.gz for_master0
+  - sudo rm -rf /home/travis/build/purplepalmdash/travisarm/src/cached1/images/
+  - sudo mv /home/travis/build/purplepalmdash/travisarm/src/cached1/* for_cluster/
   - sudo apt-get install -y sshpass
   - sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /home/travis/build/purplepalmdash/travisarm/src/ root@209.141.35.192:/root/static
 
