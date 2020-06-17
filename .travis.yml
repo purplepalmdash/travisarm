@@ -54,7 +54,7 @@ script:
   - tar cf 2004debs.tar Rong
   - xz -T4 2004debs.tar
   - sudo rm -rf Rong
-  # 18.04
+  # 18.04.4
   - docker run  -v `pwd`:/mnt -d --name deb1804 ubuntu:18.04 sleep 3600
   - docker exec deb1804 rm -f /etc/apt/apt.conf.d/docker-clean
   - docker exec deb1804 apt-get update -qq 
