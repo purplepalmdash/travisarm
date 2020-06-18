@@ -43,7 +43,8 @@ script:
   - docker exec deb2004 rm -f /etc/apt/apt.conf.d/docker-clean
   - docker exec deb2004 apt-get update -qq 
   - docker exec deb2004 apt-get install -qq -y ipset ipvsadm iotop net-tools sshpass iputils-ping nethogs python-netaddr build-essential nfs-common nfs-kernel-server 
-  - docker exec deb2004 apt-get install -qq -y tcpdump unzip wget apt-transport-https socat rpcbind arping fping python-apt pigz conntrack aufs-tools ebtables curl rsync e2fsprogs xfsprogs software-properties-common
+  - docker exec deb2004 apt-get install -qq -y tcpdump unzip wget apt-transport-https socat rpcbind arping fping python-apt pigz
+  - docker exec deb2004 apt-get install -qq -y conntrack aufs-tools ebtables curl rsync e2fsprogs xfsprogs software-properties-common
   #- docker exec deb2004  wget -O /tmp/Release.key https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04/Release.key
   #- docker exec deb2004 apt-key add /tmp/Release.key
   #- docker exec deb2004 /bin/sh -c "echo 'deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04/ /'>/etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
@@ -62,7 +63,8 @@ script:
   - docker exec deb1804 rm -f /etc/apt/apt.conf.d/docker-clean
   - docker exec deb1804 apt-get update -qq 
   - docker exec deb2004 apt-get install -qq -y ipset ipvsadm iotop net-tools sshpass iputils-ping nethogs python-netaddr build-essential nfs-common nfs-kernel-server 
-  - docker exec deb2004 apt-get install -qq -y tcpdump unzip wget apt-transport-https socat rpcbind arping fping python-apt pigz conntrack aufs-tools ebtables curl rsync e2fsprogs xfsprogs software-properties-common
+  - docker exec deb2004 apt-get install -qq -y tcpdump unzip wget apt-transport-https socat rpcbind arping fping python-apt pigz
+  - docker exec deb2004 apt-get install -qq -y conntrack aufs-tools ebtables curl rsync e2fsprogs xfsprogs software-properties-common
   - docker exec deb1804 mkdir -p /mnt/Rong
   - docker exec deb1804 /bin/sh -c "find /var/cache | grep deb$ | xargs -I % cp % /mnt/Rong/"
   - docker exec deb1804 /bin/sh -c "cd /mnt/Rong && dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz"
