@@ -153,6 +153,9 @@ script:
   #- cd registry && sudo tar czf docker.tar.gz docker && sudo mv docker.tar.gz ../ && cd ..
   #- sudo rm -rf registry && sudo mv docker.tar.gz for_master0
   - cd /home/travis/build/purplepalmdash/travisarm/src/cached1/images/
+  - sudo docker pull feipyang/install-socat
+  - sudo docker pull jessestuart/tiller:v2.13.1-arm64
+  - sudo docker pull registry:2
   - sudo docker save -o socat.tar feipyang/install-socat && sudo chmod 777 socat.tar
   - sudo docker save -o arm64tiller.tar jessestuart/tiller:v2.13.1-arm64 && sudo chmod 777 arm64tiller.tar
   - sudo docker save -o registry2.tar registry:2 && sudo chmod 777 registry2.tar
