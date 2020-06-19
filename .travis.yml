@@ -134,27 +134,29 @@ script:
   - sudo rm -rf /home/travis/build/purplepalmdash/travisarm/src/cached2/*
   - cd .. && sudo rm -rf kubespray
   # docker load all of the images and push them to the local registry server
-  - mkdir -p registry
-  - docker run -v `pwd`/registry:/var/lib/registry -d -p 5000:5000 --restart=always --name registry registry:2
+  #- mkdir -p registry
+  #- docker run -v `pwd`/registry:/var/lib/registry -d -p 5000:5000 --restart=always --name registry registry:2
   - echo >images1.txt
   - ls -1 /home/travis/build/purplepalmdash/travisarm/src/cached1/images/*.tar | xargs --no-run-if-empty -L 1 docker load -i | grep "Loaded image" | tee -a images1.txt
   - cut -c 15- images1.txt>images.txt && sed -i '/^$/d' images.txt
   - cat images.txt | awk {'print "docker tag " $1" 127.0.0.1:5000/"$1'} | tee tag.sh
   - cat images.txt | awk {'print "docker push 127.0.0.1:5000/"$1'} | tee push.sh
-  - sudo chmod 777 tag.sh push.sh
-  - ./tag.sh
-  - ./push.sh
-  - docker pull feipyang/install-socat
-  - docker tag feipyang/install-socat 127.0.0.1:5000/feipyang/install-socat
-  - docker tag registry:2 127.0.0.1:5000/registry:2
-  - docker push 127.0.0.1:5000/registry:2
-  - docker push 127.0.0.1:5000/feipyang/install-socat
-  - docker stop registry
-  - cd registry && sudo tar czf docker.tar.gz docker && sudo mv docker.tar.gz ../ && cd ..
-  - sudo rm -rf registry && sudo mv docker.tar.gz for_master0
+  #- sudo chmod 777 tag.sh push.sh
+  #- ./tag.sh
+  #- ./push.sh
+  #- docker pull feipyang/install-socat
+  #- docker tag feipyang/install-socat 127.0.0.1:5000/feipyang/install-socat
+  #- docker tag registry:2 127.0.0.1:5000/registry:2
+  #- docker push 127.0.0.1:5000/registry:2
+  #- docker push 127.0.0.1:5000/feipyang/install-socat
+  #- docker stop registry
+  #- cd registry && sudo tar czf docker.tar.gz docker && sudo mv docker.tar.gz ../ && cd ..
+  #- sudo rm -rf registry && sudo mv docker.tar.gz for_master0
   - cd /home/travis/build/purplepalmdash/travisarm/src/cached1/images/
   - sudo docker save -o socat.tar feipyang/install-socat && sudo chmod 777 socat.tar
-  - sudo mv /home/travis/build/purplepalmdash/travisarm/src/cached1/* for_cluster/
+  - sudo docker save -o arm64tiller.tar jessestuart/tiller:v2.13.1-arm64 && sudo chmod 777 arm64tiller.tar
+  - sudo docker save -o registry2.tar registry:2 && sudo chmod 777 registry2.tar
+  #- sudo mv /home/travis/build/purplepalmdash/travisarm/src/cached1/* for_cluster/
   - sudo apt-get install -y sshpass
   - sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /home/travis/build/purplepalmdash/travisarm/src/ root@209.141.35.192:/root/static
 
