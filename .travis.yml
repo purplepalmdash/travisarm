@@ -4,7 +4,7 @@ arch:
 script:
   - cd src
   - sudo apt-get install -y sshpass
-  - wget https://golang.org/dl/go1.14.6.linux-arm64.tar.gz
+  - wget --quiet https://golang.org/dl/go1.14.6.linux-arm64.tar.gz
   - sudo tar -C /usr/local -xzf go1.14.6.linux-arm64.tar.gz
   - export PATH=$PATH:/usr/local/go/bin
   - which go
@@ -15,7 +15,7 @@ script:
   - cd cmd/caddy
   - go build
   - ls *
-  #- sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /home/travis/build/purplepalmdash/travisarm/src/ root@209.141.35.192:/root/static
+  - sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./caddy root@209.141.35.192:/root/static
   ##- wget https://my-netdata.io/kickstart.sh && sudo chmod 777 kickstart.sh
   ##- sudo ./kickstart.sh
   #- mkdir -p offline/rong_static/for_addons 
