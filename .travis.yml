@@ -4,18 +4,22 @@ arch:
 script:
   - cd src
   - sudo apt-get install -y sshpass
-  - wget --quiet https://golang.org/dl/go1.14.6.linux-arm64.tar.gz
-  - sudo tar -C /usr/local -xzf go1.14.6.linux-arm64.tar.gz
-  - export PATH=$PATH:/usr/local/go/bin
-  - which go
-  - git clone https://github.com/caddyserver/caddy.git
-  - cd caddy && git checkout tags/v2.1.1 -b  caddyv211
-  - sed -i 's/v1.3.0/v1.2.5/g' go.mod
-  - go version
-  - cd cmd/caddy
-  - go build
+  - git clone https://github.com/hzliangbin/harbor-arm64.git
+  - cd harbor-arm64 &&  git checkout tags/v1.9.3 -b v193
+  - make package_offline -e VERSIONTAG=v1.9.3 PKGVERSIONTAG=v1.9.3 UIVERSIONTAG=v1.9.3 DEVFLAG=false CLAIRFLAG=true CHARTFLAG=true
   - ls *
-  - sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./caddy root@209.141.35.192:/root/static
+  #*- wget --quiet https://golang.org/dl/go1.14.6.linux-arm64.tar.gz
+  #*- sudo tar -C /usr/local -xzf go1.14.6.linux-arm64.tar.gz
+  #*- export PATH=$PATH:/usr/local/go/bin
+  #*- which go
+  #*- git clone https://github.com/caddyserver/caddy.git
+  #*- cd caddy && git checkout tags/v2.1.1 -b  caddyv211
+  #*- sed -i 's/v1.3.0/v1.2.5/g' go.mod
+  #*- go version
+  #*- cd cmd/caddy
+  #*- go build
+  #*- ls *
+  #*- sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./caddy root@209.141.35.192:/root/static
   ##- wget https://my-netdata.io/kickstart.sh && sudo chmod 777 kickstart.sh
   ##- sudo ./kickstart.sh
   #- mkdir -p offline/rong_static/for_addons 
