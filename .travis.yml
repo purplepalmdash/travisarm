@@ -8,7 +8,6 @@ script:
   - cd arm64_harbor_193
   #- cd harbor-arm64 &&  git checkout tags/v1.9.3 -b v193
   #- sudo make package_offline -e VERSIONTAG=v1.9.3 PKGVERSIONTAG=v1.9.3 UIVERSIONTAG=v1.9.3 DEVFLAG=false CLAIRFLAG=true CHARTFLAG=true
-  - cd -
   - sudo make package_offline -e VERSIONTAG=v1.9.3 PKGVERSIONTAG=v1.9.3 UIVERSIONTAG=v1.9.3 DEVFLAG=false CLAIRFLAG=true CHARTFLAG=true
   - ls *
   #*- wget --quiet https://golang.org/dl/go1.14.6.linux-arm64.tar.gz
