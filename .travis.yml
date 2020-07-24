@@ -11,8 +11,10 @@ script:
   - cd make/photon && sudo make _build_chart_server && ls * && cd -
   - sudo make package_offline -e VERSIONTAG=v1.9.3 PKGVERSIONTAG=v1.9.3 UIVERSIONTAG=v1.9.3 DEVFLAG=false CLAIRFLAG=true CHARTFLAG=true
   - ls *
-  - sudo chmod 777 -R harbor
-  - sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./harbor root@209.141.35.192:/root/static
+  - sudo du -hs *
+  - sudo find . | grep habor | grep 'v1.9.3'
+  #- sudo chmod 777 -R harbor
+  #- sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./harbor root@209.141.35.192:/root/static
   #*- wget --quiet https://golang.org/dl/go1.14.6.linux-arm64.tar.gz
   #*- sudo tar -C /usr/local -xzf go1.14.6.linux-arm64.tar.gz
   #*- export PATH=$PATH:/usr/local/go/bin
