@@ -4,11 +4,10 @@ arch:
 script:
   - cd src
   - sudo apt-get install -y sshpass
-  - git clone https://github.com/hzliangbin/harbor-arm64.git
-  - cd harbor-arm64 &&  git checkout tags/v1.9.3 -b v193
+  - git clone https://github.com/purplepalmdash/arm64_harbor_193.git
+  - cd arm64_harbor_193
+  #- cd harbor-arm64 &&  git checkout tags/v1.9.3 -b v193
   #- sudo make package_offline -e VERSIONTAG=v1.9.3 PKGVERSIONTAG=v1.9.3 UIVERSIONTAG=v1.9.3 DEVFLAG=false CLAIRFLAG=true CHARTFLAG=true
-  - cd make/photon && sudo make _build_chart_server
-  - echo "Fuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuck U"
   - cd -
   - sudo make package_offline -e VERSIONTAG=v1.9.3 PKGVERSIONTAG=v1.9.3 UIVERSIONTAG=v1.9.3 DEVFLAG=false CLAIRFLAG=true CHARTFLAG=true
   - ls *
