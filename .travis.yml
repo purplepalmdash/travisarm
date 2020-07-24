@@ -2,7 +2,7 @@ arch:
   - arm64
 
 script:
-  - cd src
+  - cd src/
   - sudo apt-get install -y sshpass
   - git clone https://github.com/purplepalmdash/arm64_harbor_193.git
   - cd arm64_harbor_193
