@@ -2,7 +2,7 @@ arch:
   - arm64
 
 script:
-  - cd src
+  - cd src/
   - sudo apt-get install -y sshpass
   #**********************************************************
   #***** Start For building rpi3 pikvm *#
@@ -26,9 +26,8 @@ script:
   #*- sudo make package_offline -e VERSIONTAG=v1.9.3 PKGVERSIONTAG=v1.9.3 UIVERSIONTAG=v1.9.3 DEVFLAG=false CLAIRFLAG=true CHARTFLAG=true
   #*- ls *
   #*- sudo du -hs *
-  #*- sudo find . | grep habor | grep 'v1.9.3'
-  #- sudo chmod 777 -R harbor
-  #- sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./harbor root@209.141.35.192:/root/static
+  #*- sudo chmod 777 -R *
+  #*- sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./harbor-offline-installer-v1.9.3.tgz root@209.141.35.192:/root/static
   #**********************************************************
   #*********** End For building harbor arm64 *#
   #**********************************************************
