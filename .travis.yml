@@ -4,17 +4,37 @@ arch:
 script:
   - cd src
   - sudo apt-get install -y sshpass
-  - git clone https://github.com/purplepalmdash/arm64_harbor_193.git
-  - cd arm64_harbor_193
-  #- cd harbor-arm64 &&  git checkout tags/v1.9.3 -b v193
-  #- sudo make package_offline -e VERSIONTAG=v1.9.3 PKGVERSIONTAG=v1.9.3 UIVERSIONTAG=v1.9.3 DEVFLAG=false CLAIRFLAG=true CHARTFLAG=true
-  - cd make/photon && sudo make _build_chart_server && ls * && cd -
-  - sudo make package_offline -e VERSIONTAG=v1.9.3 PKGVERSIONTAG=v1.9.3 UIVERSIONTAG=v1.9.3 DEVFLAG=false CLAIRFLAG=true CHARTFLAG=true
+  #**********************************************************
+  #***** Start For building rpi3 pikvm *#
+  #**********************************************************
+  - git clone https://github.com/pikvm/os.git
+  - cd os
+  - wget --quiet https://gist.githubusercontent.com/purplepalmdash/656895ae1d969b890c67bc1e06bb33e5/raw/202117e23c06cd951544c88e77506c5785389e61/config.mk
+  - make os
   - ls *
-  - sudo du -hs *
-  - sudo find . | grep habor | grep 'v1.9.3'
+  #**********************************************************
+  #***** End For building rpi3 pikvm *#
+  #**********************************************************
+  #**********************************************************
+  #***** Start For building harbor arm64 *#
+  #**********************************************************
+  #*- git clone https://github.com/purplepalmdash/arm64_harbor_193.git
+  #*- cd arm64_harbor_193
+  #*#- cd harbor-arm64 &&  git checkout tags/v1.9.3 -b v193
+  #*#- sudo make package_offline -e VERSIONTAG=v1.9.3 PKGVERSIONTAG=v1.9.3 UIVERSIONTAG=v1.9.3 DEVFLAG=false CLAIRFLAG=true CHARTFLAG=true
+  #*- cd make/photon && sudo make _build_chart_server && ls * && cd -
+  #*- sudo make package_offline -e VERSIONTAG=v1.9.3 PKGVERSIONTAG=v1.9.3 UIVERSIONTAG=v1.9.3 DEVFLAG=false CLAIRFLAG=true CHARTFLAG=true
+  #*- ls *
+  #*- sudo du -hs *
+  #*- sudo find . | grep habor | grep 'v1.9.3'
   #- sudo chmod 777 -R harbor
   #- sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./harbor root@209.141.35.192:/root/static
+  #**********************************************************
+  #*********** End For building harbor arm64 *#
+  #**********************************************************
+  #**********************************************************
+  #*********** start For building caddy arm64 *#
+  #**********************************************************
   #*- wget --quiet https://golang.org/dl/go1.14.6.linux-arm64.tar.gz
   #*- sudo tar -C /usr/local -xzf go1.14.6.linux-arm64.tar.gz
   #*- export PATH=$PATH:/usr/local/go/bin
@@ -27,6 +47,9 @@ script:
   #*- go build
   #*- ls *
   #*- sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./caddy root@209.141.35.192:/root/static
+  #**********************************************************
+  #*********** End For building caddy arm64 *#
+  #**********************************************************
   ##- wget https://my-netdata.io/kickstart.sh && sudo chmod 777 kickstart.sh
   ##- sudo ./kickstart.sh
   #- mkdir -p offline/rong_static/for_addons 
