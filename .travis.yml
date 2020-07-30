@@ -10,7 +10,7 @@ script:
   - git clone https://github.com/pikvm/os.git
   - cd os
   - wget --quiet https://gist.githubusercontent.com/purplepalmdash/656895ae1d969b890c67bc1e06bb33e5/raw/202117e23c06cd951544c88e77506c5785389e61/config.mk
-  - make os
+  - sudo make os
   - ls *
   #**********************************************************
   #***** End For building rpi3 pikvm *#
