@@ -1,6 +1,6 @@
 arch:
-  #- arm64
-  - amd64
+  - arm64
+  #- amd64
 
 script:
   - cd src/
@@ -8,11 +8,12 @@ script:
   #**********************************************************
   #***** Start For building rpi3 pikvm *#
   #**********************************************************
-  - git clone https://github.com/pikvm/os.git
-  - cd os
-  - wget --quiet https://gist.githubusercontent.com/purplepalmdash/656895ae1d969b890c67bc1e06bb33e5/raw/202117e23c06cd951544c88e77506c5785389e61/config.mk
-  - sudo make os
-  - ls *
+  - git clone https://github.com/fluent/fluentd-kubernetes-daemonset.git
+  - cd fluentd-kubernetes-daemonset/docker-image/v1.11/debian-elasticsearch6
+  - sudo docker build . -t fluent/fluentd-kubernetes-daemonset:v1-debian-elasticsearch
+  - sudo docker images
+  - sudo docker save -o fd.tar fluent/fluentd-kubernetes-daemonset:v1-debian-elasticsearch && sudo xz -T4 fd.tar && sudo chmod 777 fd.tar
+  - sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./fd.tar.xz root@209.141.35.192:/root/static
   #**********************************************************
   #***** End For building rpi3 pikvm *#
   #**********************************************************
