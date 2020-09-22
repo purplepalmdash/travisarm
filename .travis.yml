@@ -28,6 +28,7 @@ script:
   - python3 -m venv env && python3 -m venv env && source env/bin/activate 
   - pip3 install --upgrade setuptools
   - pip install --upgrade pip
+  - pip3 install --upgrade pip3
   - pip3 install  --no-cache-dir -r requirements.txt
   - ansible-playbook -i inventory/sample/hosts.ini cluster1.yml --extra-vars @rong-vars.yml
   #- sudo rm -rf /home/travis/build/purplepalmdash/travisarm/src/cached/*
