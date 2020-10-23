@@ -4,44 +4,61 @@ arch:
 
 script:
   - cd src/
-  - sudo apt-get install -y sshpass
+  - sudo apt-get install -y sshpass unzip build-essential
+  #**********************************************************
+  #### Following is for building ronggraphic
+  #**********************************************************
+  - wget --quiet http://209.141.35.192/ronggraphic-go-master.zip
+  - unzip -qq ronggraphic-go-master.zip
+  - cd ronggraphic-go-master/kobe-0.0.6 && make docker
+  - docker images
+  - cd ../KubeOperator-3.2.0 && make docker_server
+  - docker images
+  - make docker_uibase
+  - docker images
+  - make docker_ui
+  - docker images
+  - docker save -o armcombine.tar rong/ui:master rong/kobe:master rong/server:master && xz -T4 armcombine.tar
+  - ls -l -h
+  - sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./armcombine.tar.xz root@209.141.35.192:/root/static
+
   #**********************************************************
   #### Following is for kubespray docker images(2.14.0)
   #**********************************************************
-  - sudo apt-get install -y git python-pip python3-virtualenv python3-pip python3-venv python-docker python3-docker openssh-server
-  - mkdir -p /var/run/sshd && /usr/sbin/sshd -D & 
-  - mkdir -p /home/travis/build/purplepalmdash/travisarm/src/cached2
-  - python3 -m pip install --user --upgrade pip && python3 -m pip install --user virtualenv
-  - git clone https://github.com/kubernetes-sigs/kubespray.git
-  - sudo mkdir -p /etc/kubernetes && sudo chmod 777 -R /etc/kubernetes
-  - cd kubespray && git checkout tags/v2.14.0 -b kubespray2140
-  - sed -i '14,21 s/^/#/' ./roles/download/tasks/download_file.yml
-  - sed -i '93,100 s/^/#/' ./roles/download/tasks/download_file.yml
-  - wget http://209.141.35.192/patched/dinddiffarm64.diff
-  - wget http://209.141.35.192/patched/cluster1.yml
-  - wget http://209.141.35.192/patched/rong-vars.yml
-  - wget http://209.141.35.192/patched/hosts.ini
-  - cp hosts.ini inventory/sample/hosts.ini
-  - ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa 2>/dev/null <<< y >/dev/null
-  - cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
-  - cat dinddiffarm64.diff | patch -p1
-  - python3 -m venv env && python3 -m venv env && source env/bin/activate 
-  - pip3 install --upgrade setuptools
-  - pip install --upgrade pip
-  - pip3 install --upgrade pip3
-  - pip3 install  --no-cache-dir -r requirements.txt
-  - ansible-playbook -i inventory/sample/hosts.ini cluster1.yml --extra-vars @rong-vars.yml
-  #- sudo rm -rf /home/travis/build/purplepalmdash/travisarm/src/cached/*
-  - ls /home/travis/build/purplepalmdash/travisarm/src/cached1/*
-  #- sudo rm -rf /home/travis/build/purplepalmdash/travisarm/src/cached2/*
-  #- cd .. && sudo rm -rf kubespray
-  ## docker load all of the images and push them to the local registry server
-  ##- mkdir -p registry
-  ##- docker run -v `pwd`/registry:/var/lib/registry -d -p 5000:5000 --restart=always --name registry registry:2
-  #- echo >images1.txt
-  #- ls -1 /home/travis/build/purplepalmdash/travisarm/src/cached1/images/*.tar | xargs --no-run-if-empty -L 1 docker load -i | grep "Loaded image" | tee -a images1.txt
-  #- cut -c 15- images1.txt>images.txt && sed -i '/^$/d' images.txt
-  - sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /home/travis/build/purplepalmdash/travisarm/src/cached1 root@209.141.35.192:/root/static
+  #*- sudo apt-get install -y git python-pip python3-virtualenv python3-pip python3-venv python-docker python3-docker openssh-server
+  #*- mkdir -p /var/run/sshd && /usr/sbin/sshd -D & 
+  #*- mkdir -p /home/travis/build/purplepalmdash/travisarm/src/cached2
+  #*- python3 -m pip install --user --upgrade pip && python3 -m pip install --user virtualenv
+  #*- git clone https://github.com/kubernetes-sigs/kubespray.git
+  #*- sudo mkdir -p /etc/kubernetes && sudo chmod 777 -R /etc/kubernetes
+  #*- cd kubespray && git checkout tags/v2.14.0 -b kubespray2140
+  #*- sed -i '14,21 s/^/#/' ./roles/download/tasks/download_file.yml
+  #*- sed -i '93,100 s/^/#/' ./roles/download/tasks/download_file.yml
+  #*- wget http://209.141.35.192/patched/dinddiffarm64.diff
+  #*- wget http://209.141.35.192/patched/cluster1.yml
+  #*- wget http://209.141.35.192/patched/rong-vars.yml
+  #*- wget http://209.141.35.192/patched/hosts.ini
+  #*- cp hosts.ini inventory/sample/hosts.ini
+  #*- ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa 2>/dev/null <<< y >/dev/null
+  #*- cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
+  #*- cat dinddiffarm64.diff | patch -p1
+  #*- python3 -m venv env && python3 -m venv env && source env/bin/activate 
+  #*- pip3 install --upgrade setuptools
+  #*- pip install --upgrade pip
+  #*- pip3 install --upgrade pip3
+  #*- pip3 install  --no-cache-dir -r requirements.txt
+  #*- ansible-playbook -i inventory/sample/hosts.ini cluster1.yml --extra-vars @rong-vars.yml
+  #*#- sudo rm -rf /home/travis/build/purplepalmdash/travisarm/src/cached/*
+  #*- ls /home/travis/build/purplepalmdash/travisarm/src/cached1/*
+  #*#- sudo rm -rf /home/travis/build/purplepalmdash/travisarm/src/cached2/*
+  #*#- cd .. && sudo rm -rf kubespray
+  #*## docker load all of the images and push them to the local registry server
+  #*##- mkdir -p registry
+  #*##- docker run -v `pwd`/registry:/var/lib/registry -d -p 5000:5000 --restart=always --name registry registry:2
+  #*#- echo >images1.txt
+  #*#- ls -1 /home/travis/build/purplepalmdash/travisarm/src/cached1/images/*.tar | xargs --no-run-if-empty -L 1 docker load -i | grep "Loaded image" | tee -a images1.txt
+  #*#- cut -c 15- images1.txt>images.txt && sed -i '/^$/d' images.txt
+  #*- sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /home/travis/build/purplepalmdash/travisarm/src/cached1 root@209.141.35.192:/root/static
   #- cat images.txt | awk {'print "docker tag " $1" 127.0.0.1:5000/"$1'} | tee tag.sh
   #- cat images.txt | awk {'print "docker push 127.0.0.1:5000/"$1'} | tee push.sh
   ##- sudo chmod 777 tag.sh push.sh
