@@ -5,7 +5,7 @@ arch:
 script:
   - cd src/
   - sudo apt-get install -y sshpass unzip build-essential
-  - df -h; free -m; cat /proc/cpuinfo
+  #- df -h; free -m; cat /proc/cpuinfo
   #**********************************************************
   #### Following is for building ronggraphic
   #**********************************************************
