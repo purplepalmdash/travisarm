@@ -18,7 +18,8 @@ script:
   #- docker rmi `docker images -q`
   - cd ronggraphic-go-master/KubeOperator-3.2.0/
   - travis_wait 30 make docker_server_build
-  - travis_wait 30 docker save -o server.tar kubeoperator/serverbuild20201012:master; xz -T4 server.tar
+  - travis_wait 30 docker save -o server.tar kubeoperator/serverbuild20201012:master
+  - travis_wait 30 xz -T15 server.tar
   - sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./server.tar.xz root@209.141.35.192:/root/static
   - docker images
   #- docker rmi `docker images -q`
