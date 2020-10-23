@@ -27,8 +27,8 @@ RUN wget --quiet https://github.com/go-bindata/go-bindata/archive/v3.1.3.zip -O 
     && go build \
     && cp go-bindata /go/bin
 
-COPY . .
-RUN make build_server_linux GOARCH=$GOARCH
+#COPY . .
+#RUN make build_server_linux GOARCH=$GOARCH
 
 #RUN if [ "$XPACK" = "yes" ] ; then  cd xpack && sed -i 's/ ..\/KubeOperator/ \..\/..\/ko/g' go.mod && make build_linux GOARCH=$GOARCH && cp -r dist/* ../dist/  ; fi
 
