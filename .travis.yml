@@ -22,6 +22,9 @@ script:
   #- travis_wait 30 xz -T15 server.tar
   #- sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./server.tar.xz root@209.141.35.192:/root/static
   - docker images
+  - tar czvf myserver.tar.gz server.tar
+  - ls -l -h myserver.tar.gz
+  - sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./myserver.tar.gz root@209.141.35.192:/root/static
   #- docker rmi `docker images -q`
   #- make docker_uibase
   #- docker images
