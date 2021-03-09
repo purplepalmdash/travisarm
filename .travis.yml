@@ -6,7 +6,10 @@ script:
   #*********************************************************
   ### Following is for kubespray docker images(2.15.0)
   #*********************************************************
-  - sudo apt-get install -y git python-pip python3-virtualenv python3-pip python3-venv python-docker python3-docker openssh-server python3.8
+  - sudo apt-get install -y git python-pip python3-virtualenv python3-pip python3-venv python-docker python3-docker openssh-server 
+  - sudo apt install software-properties-common
+  - sudo add-apt-repository ppa:deadsnakes/ppa
+  - sudo apt update && sudo apt install python3.7
   - mkdir -p /var/run/sshd && /usr/sbin/sshd -D & 
   - mkdir -p /home/travis/build/purplepalmdash/travisarm/src/cached2
   - python3 -m pip install --user --upgrade "pip < 21.0" && python3 -m pip install --user virtualenv
