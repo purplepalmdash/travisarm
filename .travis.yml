@@ -6,7 +6,7 @@ script:
   #*********************************************************
   ### Following is for kubespray docker images(2.15.0)
   #*********************************************************
-  - sudo apt-get install -y git python-pip python3-virtualenv python3-pip python3-venv python-docker python3-docker openssh-server
+  - sudo apt-get install -y git python-pip python3-virtualenv python3-pip python3-venv python-docker python3-docker openssh-server python3.8
   - mkdir -p /var/run/sshd && /usr/sbin/sshd -D & 
   - mkdir -p /home/travis/build/purplepalmdash/travisarm/src/cached2
   - python3 -m pip install --user --upgrade "pip < 21.0" && python3 -m pip install --user virtualenv
@@ -26,7 +26,7 @@ script:
   - python3 -m venv env && python3 -m venv env && source env/bin/activate 
   - pip3 install --upgrade setuptools
   - pip install --upgrade "pip < 21.0"
-  - pip3 install --upgrade "pip3 < 21.0"
+  - pip3 install --upgrade pip3
   - pip3 install  --no-cache-dir -r requirements.txt
   - ansible-playbook -i inventory/sample/hosts.ini cluster1.yml --extra-vars @rong-vars.yml
   #- sudo rm -rf /home/travis/build/purplepalmdash/travisarm/src/cached/*
