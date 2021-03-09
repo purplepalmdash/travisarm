@@ -30,6 +30,8 @@ script:
   - ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa 2>/dev/null <<< y >/dev/null
   - cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
   - cat dinddiffarm64.diff | patch -p1
+  - python3 -m pip install --upgrade pip
+  - python3 -m pip install --upgrade venv
   - python3 -m venv env && python3 -m venv env && source env/bin/activate 
   - pip3 install --upgrade setuptools
   - pip install --upgrade "pip < 21.0"
