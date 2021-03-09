@@ -34,9 +34,9 @@ script:
   - pip3 install --upgrade setuptools
   - pip install --upgrade "pip < 21.0"
   - pip3 install --upgrade pip3
-  - pip3 install  --no-cache-dir -r requirements.txt
-  - sudo apt-add-repository ppa:ansible/ansible
-  - sudo apt-get update -y && sudo apt-get install -y ansible
+  - pip install  --no-cache-dir -r requirements.txt
+  #- sudo apt-add-repository ppa:ansible/ansible
+  #- sudo apt-get update -y && sudo apt-get install -y ansible
   - ansible --version
   - ansible-playbook -i inventory/sample/hosts.ini cluster1.yml --extra-vars @rong-vars.yml
   #- sudo rm -rf /home/travis/build/purplepalmdash/travisarm/src/cached/*
