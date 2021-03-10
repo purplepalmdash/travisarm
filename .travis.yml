@@ -34,7 +34,7 @@ script:
   - python3 -m pip install --user virtualenv
   - sudo apt-get install -y python3.7-venv python-virtualenv python-dev libpython-dev
   - sudo virtualenv venv --python=python2.7
-  - sed -i 's/ansible*/ansible==2.9.6' requirements.txt
+  - sed -i 's/ansible*/ansible==2.9.6/' requirements.txt
   - pip2 install --no-cache-dir -r requirements.txt
   - cat requirements.txt
   - which ansible
