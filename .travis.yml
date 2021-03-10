@@ -32,14 +32,17 @@ script:
   - cat dinddiffarm64.diff | patch -p1
   - python3 -m pip install --upgrade pip
   - python3 -m pip install --user virtualenv
-  - sudo apt-get install -y python3.7-venv
-  - python3 -m venv env && source env/bin/activate 
-  - pip3 install --upgrade setuptools
-  - pip install --upgrade "pip < 21.0"
-  - python3 -m pip install --upgrade pip
-#  - pip3 install --upgrade pip3
-#  - python3 -m pip install --upgrade pip
-  - pip3 install  --no-cache-dir -r requirements.txt
+  - sudo apt-get install -y python3.7-venv python-virtualenv
+  - sudo virtualenv venv --python=python2.7
+  - pip2 install --no-cache-dir -r requirements.txt
+  - which ansible
+  #- python3 -m venv env && source env/bin/activate 
+  #- pip3 install --upgrade setuptools
+  #- pip install --upgrade "pip < 21.0"
+  #- python3 -m pip install --upgrade pip
+# # - pip3 install --upgrade pip3
+# # - python3 -m pip install --upgrade pip
+  #- pip3 install  --no-cache-dir -r requirements.txt
   #- sudo apt-add-repository ppa:ansible/ansible
   #- sudo apt-get update -y && sudo apt-get install -y ansible
   - ansible --version
