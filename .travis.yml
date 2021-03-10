@@ -16,7 +16,7 @@ script:
   - sudo python3 --v
   - mkdir -p /var/run/sshd && /usr/sbin/sshd -D & 
   - mkdir -p /home/travis/build/purplepalmdash/travisarm/src/cached2
-  - mkdir -p /home/travis/build/purplepalmdash/travisarm/src/cached1/helm-v3.3.4
+  - mkdir -p /home/travis/build/purplepalmdash/travisarm/src/cached1/helm-v3.3.4/linux-arm64
   - python3 -m pip install --user --upgrade "pip < 21.0" && python3 -m pip install --user virtualenv
   - git clone https://github.com/kubernetes-sigs/kubespray.git
   - sudo mkdir -p /etc/kubernetes && sudo chmod 777 -R /etc/kubernetes
